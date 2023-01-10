@@ -62,6 +62,7 @@ set(SOURCE_FILES
     )
 
 sofa_find_package(SoftRobots QUIET)
+sofa_find_package(NeedleForcePlugin QUIET)
 if(SoftRobots_FOUND)
     list(APPEND HEADER_FILES
         ${SRC_ROOT_DIR}/constraint/CosseratActuatorConstraint.h
@@ -104,6 +105,14 @@ if(SoftRobots_FOUND)
     message("-- Found dependency: 'SoftRobots' plugin.")
 endif()
 
+if(NeedleForcePlugin_FOUND)
+    target_link_libraries(${PROJECT_NAME} NeedleForcePlugin)
+    message("-- Found dependency: 'NeedleForcePlugin' plugin.")
+    
+else() 
+    message("Needle plugin not linked properly")
+endif()
+
 sofa_install_pythonscripts(PLUGIN_NAME ${PROJECT_NAME} PYTHONSCRIPTS_SOURCE_DIR "python")
 
 find_file(SofaPython3Tools NAMES "SofaPython3/lib/cmake/SofaPython3/SofaPython3Tools.cmake")
@@ -114,6 +123,7 @@ else()
     # try again with the find_package mechanism
     find_package(SofaPython3 QUIET)
 endif()
+
 if(SofaPython3Tools OR SofaPython3_FOUND)
     message("-- Python3 packages will be installed.")
     set(SP3_PYTHON_PACKAGES_DIRECTORY "python3/site-packages")
