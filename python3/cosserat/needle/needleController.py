@@ -25,7 +25,7 @@ class Animation(Sofa.Core.Controller):
         self.contactListener = args[1]
         self.generic = args[2]
         self.entryPoint = []
-        self.threshold = 3.
+        self.threshold = params.ConstraintsParams.entryForce
 
         self.constraintPointsNode = args[3]
         self.pointManager = self.constraintPointsNode.pointsManager
