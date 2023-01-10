@@ -217,3 +217,4 @@ def createScene(rootNode):
                                input2=inputCableMO, output=outputPointMO, direction="@../../FramesMO.position")
 
     return rootNode
+

@@ -7,28 +7,28 @@ import string
 
 @dataclass
 class GeometryParams:
-    radius: float = 0.1
+    radius: float = 0.05335
     nbSections: int = 16
     nbFrames: int = 15
     totalLength: float = 15.
 
 @dataclass
 class PhysicsParams:
-    youngModulus: float = 1.20e9
-    poissonRatio: float = 0.4
-    mass: float = 0.3
+    youngModulus: float = 80.0e7
+    poissonRatio: float = 0.33
+    mass: float = 0.0865
     rayleighStiffness: float = 0.1
 
 
 @dataclass
 class FemParams:
-    youngModulus: float = 100
+    youngModulus: float = 20
     poissonRatio: float = 0.48
     mass: float = 0.3
     rayleigh: float = 0.1
     minVol: string = "16. -8. -5."
     maxVol: string = "40. 8. 5."
-    mesh: string = "6 6 6"
+    mesh: string = "10 10 10"
     box: string = "15 -10 -10 41 -6 10"
 
 
@@ -60,5 +60,5 @@ class NeedleParameters:
 @dataclass
 class ConstraintsParams:
     constraintDistance: float = 1.3  # distance between two constraint points
-    entryForce: float = 0.3  # The required force to penetrate the volume
+    entryForce: float = 0.2  # The required force to penetrate the volume # about 0.7N in the literature, we have a bit less in our phantom
 

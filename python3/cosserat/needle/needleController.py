@@ -82,6 +82,7 @@ class Animation(Sofa.Core.Controller):
 
     def onKeypressedEvent(self, event):
         key = event['key']
+        
         if key == "M": 
             self.pointManager.addNewPointToState()
         if key == "D": 
@@ -94,7 +95,8 @@ class Animation(Sofa.Core.Controller):
                 posA[0][0] -= self.rate
         elif ord(key) == 20:  # right
             with self.rigidBaseMO.rest_position.writeable() as posA:
-                posA[0][0] += self.rate
+                while(posA[0][0] < 14.0):
+                    posA[0][0] += self.rate
 
         elif ord(key) == 21:  # down
             with self.rigidBaseMO.rest_position.writeable() as posA:
