@@ -7,7 +7,7 @@ Based on the work done with SofaPython. See POEMapping.py
 from cosserat.needle.needleController import Animation
 from params import NeedleParameters, GeometryParams, PhysicsParams, FemParams, ContactParams
 from cosserat.usefulFunctions import pluginList
-from cosserat.createFemRegularGrid import createFemCubeWithParams
+from cosserat.createFemRegularGrid import createFemCubeWithParamsJHU
 from cosserat.cosseratObject import Cosserat
 from cosserat.utils import addConstraintPoint
 import sys
@@ -69,13 +69,13 @@ def createScene(rootNode):
     slidingPoint = needle.addSlidingPoints()
 
     beamFrame = needle.cosseratFrame
-    beamFrame.addObject('NeedleForceField', name='needleTipForce', template = 'Rigid3d', BevelAngle = 0.8, InputForce = "@../../../../GCS.constraintForces", CosseratPos = "@../../../../solverNode/needle/cosseratCoordinate/cosseratCoordinateMO.position")
+    beamFrame.addObject('NeedleForceField', name='needleTipForce', template = 'Rigid3d', BevelAngle = 0.8, InputForce = "@../../../../GCS.constraintForces")
 
 
     # -----------------
     # Start the volume definition
     # -----------------
-    cubeNode = createFemCubeWithParams(rootNode, FemParams)
+    cubeNode = createFemCubeWithParamsJHU(rootNode, FemParams)
     gelNode = cubeNode.getChild('gelNode')
     # FEM constraint points
     constraintPointNode = addConstraintPoint(
