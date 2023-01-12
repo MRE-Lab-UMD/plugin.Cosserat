@@ -60,5 +60,5 @@ class NeedleParameters:
 @dataclass
 class ConstraintsParams:
     constraintDistance: float = 1.3  # distance between two constraint points
-    entryForce: float = 0.2  # The required force to penetrate the volume # about 0.7N in the literature, we have a bit less in our phantom
+    entryForce: float = 0  # The required force to penetrate the volume # about 0.7N in the literature, we have a bit less in our phantom
 

@@ -69,7 +69,8 @@ def createScene(rootNode):
     slidingPoint = needle.addSlidingPoints()
 
     beamFrame = needle.cosseratFrame
-    beamFrame.addObject('NeedleForceField', name='needleTipForce', template = 'Rigid3d', BevelAngle = 0.8, InputForce = "@../../../../GCS.constraintForces", CosseratPos = "@../../../../solverNode/needle/cosseratCoordinate/cosseratCoordinateMO.position")
+    beamFrame.addObject('NeedleForceField', name='needleTipForce', template = 'Rigid3d', BevelAngle = 0.8, InputForce = "@../../../../GCS.constraintForces") 
+    #CosseratPos = "@../../../../solverNode/needle/cosseratCoordinate/cosseratCoordinateMO.position")
 
 
     # -----------------
