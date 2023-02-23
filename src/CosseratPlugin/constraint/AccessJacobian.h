@@ -52,10 +52,10 @@ namespace sofa::component::constraintset
      * This class contains common implementation of cable constraints
      */
     template <class DataTypes>
-    class CosseratNeedleSlidingConstraint : public Constraint<DataTypes>
+    class AccessJacobian : public Constraint<DataTypes>
     {
     public:
-        SOFA_CLASS(SOFA_TEMPLATE(CosseratNeedleSlidingConstraint, DataTypes), SOFA_TEMPLATE(Constraint, DataTypes));
+        SOFA_CLASS(SOFA_TEMPLATE(AccessJacobian, DataTypes), SOFA_TEMPLATE(Constraint, DataTypes));
         typedef typename DataTypes::VecCoord VecCoord;
         typedef typename DataTypes::VecDeriv VecDeriv;
         typedef typename DataTypes::Coord Coord;
@@ -71,9 +71,9 @@ namespace sofa::component::constraintset
         typedef type::vector<unsigned int> SetIndexArray;
 
     public:
-        CosseratNeedleSlidingConstraint(MechanicalState *object = nullptr);
+        AccessJacobian(MechanicalState *object = nullptr);
 
-        ~CosseratNeedleSlidingConstraint() override;
+        ~AccessJacobian() override;
 
         ////////////////////////// Inherited from BaseObject ////////////////////
         void init() override;
@@ -104,7 +104,6 @@ namespace sofa::component::constraintset
 
         void storeLambda(const ConstraintParams */*cParams*/, Data<VecDeriv> &result, const Data<MatrixDeriv> &jacobian, const sofa::linearalgebra::BaseVector *lambda)
         {
-
             auto res = sofa::helper::getWriteAccessor(result);
             const MatrixDeriv &j = jacobian.getValue();
             j.multTransposeBaseVector(res, lambda); // lambda is a vector of scalar value so block size is one.
@@ -112,7 +111,6 @@ namespace sofa::component::constraintset
 
          void storeLambda(const ConstraintParams */*cParams*/, MultiVecDerivId res, const sofa::linearalgebra::BaseVector *lambda) override
          {
-
             // if (cParams)
             // {
             //     storeLambda(cParams, *res[m_state1->getMstate()].write(), *cParams->readJ(m_state1->getMstate()), lambda);

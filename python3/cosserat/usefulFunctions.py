@@ -37,7 +37,7 @@ pluginList = ['SofaPreconditioner', 'Sofa.Component.IO.Mesh', 'Sofa.Component.Ma
               "Sofa.Component.Collision.Detection.Intersection", "Sofa.Component.Collision.Geometry", "Sofa.Component.Collision.Response.Contact", "Sofa.Component.Mapping.MappedMatrix", "Sofa.Component.Topology.Container.Grid","Sofa.Component.Mapping.NonLinear",
               "Sofa.Component.Constraint.Lagrangian.Model",
               "Sofa.Component.Collision.Response.Mapper",
-              "Sofa.Component.Topology.Mapping", "Sofa.Component.LinearSolver.Iterative"]
+              "Sofa.Component.Topology.Mapping", "Sofa.Component.LinearSolver.Iterative", "Sofa.Component.Constraint.Projective"]
 
 
 PRig = 0.38  # poison ratio for the rigid part of the beam

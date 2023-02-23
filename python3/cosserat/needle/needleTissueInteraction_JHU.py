@@ -62,6 +62,11 @@ def createScene(rootNode):
         Cosserat(parent=solverNode, cosseratGeometry=needleGeometryConfig, radius=GeometryParams.radius,
                  name="needle", youngModulus=PhysicsParams.youngModulus, poissonRatio=PhysicsParams.poissonRatio,
                  rayleighStiffness=PhysicsParams.rayleighStiffness))
+
+    # Adding linear constraint to move needle forward
+    rigidBase = needle.getChild("rigidBase")
+    rigidBase.addObject("LinearMovementConstraint", mstate="@RigidBaseMO", indices="0", name = "MoveForward", template = "Rigid3d", keyTimes = "0 2", movements="0 0 0 0 0 0 10 0 0 0 0 0", relativeMovements="True")
+
     needleCollisionModel = needle.addPointCollisionModel("needleCollision")
 
     # These state is mapped on the needle and used to compute the distance between the needle and the

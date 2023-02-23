@@ -40,6 +40,8 @@ set(HEADER_FILES
     ${SRC_ROOT_DIR}/forcefield/CosseratInternalActuation.inl
     ${SRC_ROOT_DIR}/constraint/CosseratSlidingConstraint.h
     ${SRC_ROOT_DIR}/constraint/CosseratSlidingConstraint.inl
+    ${SRC_ROOT_DIR}/constraint/AccessJacobian.h
+    ${SRC_ROOT_DIR}/constraint/AccessJacobian.inl
     ${SRC_ROOT_DIR}/mapping/LegendrePolynomialsMapping.h
     ${SRC_ROOT_DIR}/mapping/LegendrePolynomialsMapping.inl
     ${SRC_ROOT_DIR}/constraint/CosseratNeedleSlidingConstraint.h
@@ -57,6 +59,7 @@ set(SOURCE_FILES
     ${SRC_ROOT_DIR}/forcefield/BeamHookeLawForceField.cpp
     ${SRC_ROOT_DIR}/forcefield/CosseratInternalActuation.cpp
     ${SRC_ROOT_DIR}/constraint/CosseratSlidingConstraint.cpp
+    ${SRC_ROOT_DIR}/constraint/AccessJacobian.cpp
     ${SRC_ROOT_DIR}/mapping/LegendrePolynomialsMapping.cpp
     ${SRC_ROOT_DIR}/constraint/CosseratNeedleSlidingConstraint.cpp
     )

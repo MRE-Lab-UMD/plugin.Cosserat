@@ -62,14 +62,22 @@ def createScene(rootNode):
         Cosserat(parent=solverNode, cosseratGeometry=needleGeometryConfig, radius=GeometryParams.radius,
                  name="needle", youngModulus=PhysicsParams.youngModulus, poissonRatio=PhysicsParams.poissonRatio,
                  rayleighStiffness=PhysicsParams.rayleighStiffness))
+
+    # rigidBase = needle.getChild("rigidBase")
+    # rigidBase.addObject("LinearMovementConstraint", mstate="@RigidBaseMO", indices="0", name = "MoveForward", template = "Rigid3d", keyTimes = "0 2", movements="0 0 0 0 0 0 10 0 0 0 0 0", relativeMovements="True")
+
     needleCollisionModel = needle.addPointCollisionModel("needleCollision")
 
     # These state is mapped on the needle and used to compute the distance between the needle and the
     # FEM constraint points
     slidingPoint = needle.addSlidingPoints()
 
+    
+
     beamFrame = needle.cosseratFrame
-    beamFrame.addObject('NeedleForceField', name='needleTipForce', template = 'Rigid3d', BevelAngle = 0.8, InputForce = "@../../../../GCS.constraintForces") 
+    # beamFrame.addObject('NeedleForceField', name='needleTipForce', template = 'Rigid3d', BevelAngle = 0.3, InputForce = "@../../../../solverNode/needle/cosseratCoordinate/cosseratCoordinateMO.constraint")
+    
+    # ../../cosseratCoordinate/cosseratCoordinateMO.constraint") 
     #CosseratPos = "@../../../../solverNode/needle/cosseratCoordinate/cosseratCoordinateMO.position")
 
 

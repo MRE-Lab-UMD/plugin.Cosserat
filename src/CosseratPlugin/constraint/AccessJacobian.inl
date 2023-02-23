@@ -33,7 +33,7 @@
 #include <sofa/core/visual/VisualParams.h>
 #include <sofa/type/Vec.h>
 #include <sofa/component/constraint/lagrangian/model/BilateralInteractionConstraint.h>
-#include "CosseratNeedleSlidingConstraint.h"
+#include "AccessJacobian.h"
 
 namespace sofa::component::constraintset
 {
@@ -52,7 +52,7 @@ namespace sofa::component::constraintset
   using sofa::component::constraint::lagrangian::model::BilateralConstraintResolution;
 
   template <class DataTypes>
-  CosseratNeedleSlidingConstraint<DataTypes>::CosseratNeedleSlidingConstraint(MechanicalState *object)
+  AccessJacobian<DataTypes>::AccessJacobian(MechanicalState *object)
       : Inherit1(object),
         d_value(initData(&d_value, "value", "Displacement or force to impose.\n")),
         d_valueIndex(initData(&d_valueIndex, (unsigned int)0, "valueIndex",
@@ -66,12 +66,12 @@ namespace sofa::component::constraintset
   {}
 
   template <class DataTypes>
-  CosseratNeedleSlidingConstraint<DataTypes>::~CosseratNeedleSlidingConstraint()
+  AccessJacobian<DataTypes>::~AccessJacobian()
   {
   }
 
   template <class DataTypes>
-  void CosseratNeedleSlidingConstraint<DataTypes>::init()
+  void AccessJacobian<DataTypes>::init()
   {
     Inherit1::init();
     d_componentState.setValue(ComponentState::Valid);
@@ -80,13 +80,13 @@ namespace sofa::component::constraintset
   }
 
   template <class DataTypes>
-  void CosseratNeedleSlidingConstraint<DataTypes>::reinit()
+  void AccessJacobian<DataTypes>::reinit()
   {
     internalInit();
   }
 
   template <class DataTypes>
-  void CosseratNeedleSlidingConstraint<DataTypes>::internalInit()
+  void AccessJacobian<DataTypes>::internalInit()
   { 
     if (d_value.getValue().size() == 0)
     {
@@ -104,43 +104,16 @@ namespace sofa::component::constraintset
   }
 
   template <class DataTypes>
-  void CosseratNeedleSlidingConstraint<DataTypes>::buildConstraintMatrix(const ConstraintParams *cParams, DataMatrixDeriv &cMatrix, unsigned int &cIndex, const DataVecCoord &x)
+  void AccessJacobian<DataTypes>::buildConstraintMatrix(const ConstraintParams *cParams, DataMatrixDeriv &cMatrix, unsigned int &cIndex, const DataVecCoord &x)
   {
-    if (d_componentState.getValue() != ComponentState::Valid)
-      return;
 
-    SOFA_UNUSED(cParams);
-    MatrixDeriv &matrix = *cMatrix.beginEdit();
-    VecCoord positions = x.getValue();
-    m_constraintId = cIndex;
-
-    type::Vec<3, bool> use = d_useDirections.getValue();
-
-    for (unsigned int i = 0; i < positions.size(); i++)
-    {
-      if (use[1])
-      {
-        MatrixDerivRowIterator c_it = matrix.writeLine(cIndex++);
-        c_it.addCol(i, Coord(0, 1, 0));
-      
-      }
-      if (use[2])
-      {
-        MatrixDerivRowIterator c_it = matrix.writeLine(cIndex++);
-        c_it.addCol(i, Coord(0, 0, 1));
-      }
-    }
-    cMatrix.endEdit();
-    m_nbLines = cIndex - m_constraintId;
     
   }
 
   template <class DataTypes>
-  void CosseratNeedleSlidingConstraint<DataTypes>::getConstraintViolation(const ConstraintParams *cParams,
+  void AccessJacobian<DataTypes>::getConstraintViolation(const ConstraintParams *cParams,
                                                                           BaseVector *resV, const DataVecCoord &x, const DataVecDeriv &v)
-  //    void CosseratNeedleSlidingConstraint<DataTypes>::getConstraintViolation(const ConstraintParams* cParams,
-  //                                                                        BaseVector *resV,
-  //                                                                        const BaseVector *Jdx)
+
   {
     if (d_componentState.getValue() != ComponentState::Valid)
       return;
@@ -155,22 +128,24 @@ namespace sofa::component::constraintset
     {
       if (use[0]){
         Real dfree0 = positions[i][0];
-        resV->set(m_constraintId + 2 * i, dfree0);
+        // resV->set(m_constraintId + 2 * i, dfree0);
+        std::cout << "Constraint in x " << dfree0 << std::endl;
       }
       if (use[1]){
         Real dfree1 = positions[i][1];
-        resV->set(m_constraintId + 2 * i, dfree1);
-        
+        // resV->set(m_constraintId + 2 * i, dfree1);
+        std::cout << "Constraint in y " << resV -> element(2) << std::endl;
       }
       if (use[2]){
         Real dfree2 = positions[i][2];
-        resV->set(m_constraintId + 2 * i + 1, dfree2);
+        // resV->set(m_constraintId + 2 * i + 1, dfree2);
+        std::cout << "Constraint in z " << resV -> element(3) << std::endl;
       }
     }
   }
 
   template <class DataTypes>
-  void CosseratNeedleSlidingConstraint<DataTypes>::getConstraintResolution(const ConstraintParams *,
+  void AccessJacobian<DataTypes>::getConstraintResolution(const ConstraintParams *,
                                                                            std::vector<core::behavior::ConstraintResolution *> &resTab,
                                                                            unsigned int &offset)
   {
@@ -186,7 +161,7 @@ namespace sofa::component::constraintset
   }
 
   template <class DataTypes>
-  void CosseratNeedleSlidingConstraint<DataTypes>::draw(const VisualParams *vparams)
+  void AccessJacobian<DataTypes>::draw(const VisualParams *vparams)
   {
     SOFA_UNUSED(vparams);
     if (d_componentState.getValue() != ComponentState::Valid)

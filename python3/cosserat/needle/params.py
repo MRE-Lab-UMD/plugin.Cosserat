@@ -14,7 +14,7 @@ class GeometryParams:
 
 @dataclass
 class PhysicsParams:
-    youngModulus: float = 80.0e7
+    youngModulus: float = 40.0e7
     poissonRatio: float = 0.33
     mass: float = 0.0865
     rayleighStiffness: float = 0.1
@@ -22,13 +22,13 @@ class PhysicsParams:
 
 @dataclass
 class FemParams:
-    youngModulus: float = 20
+    youngModulus: float = 450
     poissonRatio: float = 0.48
-    mass: float = 0.3
+    mass: float = 2.17
     rayleigh: float = 0.1
     minVol: string = "16. -8. -5."
     maxVol: string = "40. 8. 5."
-    mesh: string = "10 10 10"
+    mesh: string = "6 6 6"
     box: string = "15 -10 -10 41 -6 10"
 
 
@@ -60,5 +60,5 @@ class NeedleParameters:
 @dataclass
 class ConstraintsParams:
     constraintDistance: float = 1.3  # distance between two constraint points
-    entryForce: float = 0  # The required force to penetrate the volume # about 0.7N in the literature, we have a bit less in our phantom
+    entryForce: float = 0.1  # The required force to penetrate the volume # about 0.7N in the literature, we have a bit less in our phantom
 
